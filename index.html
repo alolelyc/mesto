@@ -19,13 +19,12 @@
       <div class="profile__info">
         <div class="profile__info-title">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
-          <button class="profile__edit">
-            <img src="./images/karandash.svg" alt="карандаш" class="profile__edit-icon"></button>
+          <button type="button" class="profile__edit-icon"></button>
         </div>
         <p class="profile__job">Исследователь океана</p>
       </div>
-      <button class="profile__button-add">
-        <img src="./images/plus.svg" alt="плюс" class="profile__button-add-icon"></button>
+      <button type="button" class="profile__button-add-icon"></button>
+      </div>
     </section>
 
     <section class="elements">
@@ -33,8 +32,7 @@
         <img src="./images/pineapple.jpg" alt="ананас" class="card__image">
         <div class="card__item">
           <h2 class="card__title">Ананас</h2>
-          <button class="card__like-button">
-            <img src="./images/hеart-like.svg" alt="лайк"></button>
+          <button type="button" class="card__like-button"></button>
         </div>
       </article>
 
@@ -42,8 +40,7 @@
         <img src="./images/apple.jpg" alt="яблоко" class="card__image">
         <div class="card__item">
           <h2 class="card__title">Яблоко</h2>
-          <button class="card__like-button">
-            <img src="./images/hеart-like.svg" alt="лайк"></button>
+          <button type="button" class="card__like-button"></button>
         </div>
       </article>
 
@@ -51,8 +48,7 @@
         <img src="./images/orange.jpg" alt="апельсин" class="card__image">
         <div class="card__item">
           <h2 class="card__title">Апельсин</h2>
-          <button class="card__like-button">
-            <img src="./images/hеart-like.svg" alt="лайк"></button>
+          <button type="button" class="card__like-button"></button>
         </div>
       </article>
 
@@ -60,8 +56,7 @@
         <img src="./images/grape.jpg" alt="виноград" class="card__image">
         <div class="card__item">
           <h2 class="card__title">Виноград</h2>
-          <button class="card__like-button">
-            <img src="./images/hеart-like.svg" alt="лайк"></button>
+          <button type="button" class="card__like-button"></button>
         </div>
       </article>
 
@@ -69,8 +64,7 @@
         <img src="./images/cherry.jpg" alt="вишня" class="card__image">
         <div class="card__item">
           <h2 class="card__title">Вишня</h2>
-          <button class="card__like-button">
-            <img src="./images/hеart-like.svg" alt="лайк"></button>
+          <button type="button" class="card__like-button"></button>
         </div>
       </article>
 
@@ -78,8 +72,7 @@
         <img src="./images/mango.jpg" alt="манго" class="card__image">
         <div class="card__item">
           <h2 class="card__title">Манго</h2>
-          <button class="card__like-button">
-            <img src="./images/hеart-like.svg" alt="лайк"></button>
+          <button type="button" class="card__like-button"></button>
         </div>
       </article>
     </section>
@@ -91,17 +84,16 @@
 
   <section class="popup">
     <div class="popup__content">
-      <button class="popup__close">
-        <img src="./images/Close_Icon.png" alt="кнопка закрыть" class="popup__close-icon"></button>
+      <button type="button" class="popup__close"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
       <form class="popup__profile" name="profile" method="post">
-        <input class="popup__input popup__input_name" type="text" name="name" value="">
-        <input class="popup__input popup__input_job" type="text" name="job" value="">
+        <input class="popup__input popup__input_type_name" type="text" name="name">
+        <input class="popup__input popup__input_type_job" type="text" name="job">
         <input class="popup__save" type="submit" name="save" value="Сохранить">
       </form>
     </div>
   </section>
-  <script src="scripts/script.js"></script>
+  <script src="scripts/index.js"></script>
 </body>
 
 </html>

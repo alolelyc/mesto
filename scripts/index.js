@@ -2,36 +2,36 @@ const profileInfo = document.querySelector('.profile__info');
 const popupElement = document.querySelector('.popup');
 const nameProfile = document.querySelector('.profile__name');
 const jobProfile = document.querySelector('.profile__job');
-const popupOpenButtonElement = profileInfo.querySelector('.profile__edit');
+const popupOpenButtonElement = profileInfo.querySelector('.profile__edit-icon');
 const popupCloseButtonElement = popupElement.querySelector('.popup__close');
 const popupForm = popupElement.querySelector('.popup__profile');
-const inputNameProfile = document.querySelector('.popup__input_name');
-const inputJobProfile = document.querySelector('.popup__input_job');
+const inputNameProfile = document.querySelector('.popup__input_type_name');
+const inputJobProfile = document.querySelector('.popup__input_type_job');
 
 const openPopup = function () {
-    popupElement.classList.add('popup_opened')
-    inputNameProfile.value = nameProfile.textContent;
-    inputJobProfile.value = jobProfile.textContent;
+  popupElement.classList.add('popup_opened')
+  inputNameProfile.value = nameProfile.textContent;
+  inputJobProfile.value = jobProfile.textContent;
 }
 
 const closePopup = function () {
-    popupElement.classList.remove('popup_opened');
+  popupElement.classList.remove('popup_opened');
 }
 
 const closePopupByClickOnOverlay = function (event) {
-   if (event.target !== event.currentTarget) { return; }
+  if (event.target !== event.currentTarget) { return; }
     else { closePopup(); }
-   }
+}
 
 const editProfileInfo = function () {
-    nameProfile.textContent = inputNameProfile.value;
-    jobProfile.textContent = inputJobProfile.value;
+  nameProfile.textContent = inputNameProfile.value;
+  jobProfile.textContent = inputJobProfile.value;
 }
 
 const savePopupInfo = function (evt) {
-    evt.preventDefault();
-    editProfileInfo();
-    closePopup();
+  evt.preventDefault();
+  editProfileInfo();
+  closePopup();
 }
 
 popupForm.addEventListener('submit', savePopupInfo);

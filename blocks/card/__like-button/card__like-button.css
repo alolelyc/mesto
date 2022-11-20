@@ -1,4 +1,5 @@
 .card__like-button {
+  background-image: url(../../../images/hеart-like.svg);
   width: 22px;
   background-repeat: no-repeat;
   border: none;
@@ -11,5 +12,5 @@
 }
 
 .card__like-button:hover {
-  opacity: .6;
+  opacity: .5;
 }

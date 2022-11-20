@@ -8,7 +8,6 @@
 
 @media screen and (max-width: 568px) {
   .profile__avatar-image {
-    margin: auto;
+    margin: 0;
   }
 }
-

@@ -3,6 +3,7 @@
   justify-content: flex-start;
   max-width: 880px;
   width: 100%;
+  box-sizing: border-box;
   padding: 0;
   margin: auto;
 }
@@ -16,5 +17,6 @@
 @media screen and (max-width: 568px) {
   .footer {
     max-width: 282px;
+    margin: 0 19px;
   }
 }
