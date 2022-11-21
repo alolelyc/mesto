@@ -13,6 +13,7 @@
   border: none;
   width: 32px;
   height: 32px;
+  background-size: 32px;
 }
 
 .popup__close:hover {
