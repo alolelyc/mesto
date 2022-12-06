@@ -5,6 +5,8 @@
   <meta charset="UTF-8">
   <link rel="stylesheet" href="./pages/index.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script defer src="./scripts/cards.js"></script>
+  <script defer src="./scripts/index.js"></script>
   <title>Mesto</title>
 </head>
 
@@ -39,9 +41,10 @@
     <div class="popup__content">
       <button type="button" class="popup__close"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form class="popup__profile" name="profile" method="post">
-        <input class="popup__input popup__input_type_name" placeholder="Жак Ив Кусто" type="text" name="name">
-        <input class="popup__input popup__input_type_job" placeholder="Исследователь океана" type="text" name="job">
+      <form class="popup__form" name="form" method="post">
+        <input class="popup__input popup__input_type_name" placeholder="Жак Ив Кусто" type="text" name="name" required>
+        <input class="popup__input popup__input_type_job" placeholder="Исследователь океана" type="text" name="job"
+          required>
         <button type="submit" class="popup__save" name="save">Сохранить</button>
       </form>
     </div>
@@ -51,9 +54,10 @@
     <div class="popup__content">
       <button type="button" class="popup__close"></button>
       <h2 class="popup__title">Новое место</h2>
-      <form class="popup__profile" name="profile" method="post">
-        <input class="popup__input popup__input_type_add" placeholder="Название" type="text" name="name">
-        <input class="popup__input popup__input_type_link" placeholder="Ссылка на картинку" type="link" name="link">
+      <form class="popup__form" name="form" method="post">
+        <input class="popup__input popup__input_type_add" placeholder="Название" type="text" name="name" required>
+        <input class="popup__input popup__input_type_link" placeholder="Ссылка на картинку" type="url" name="link"
+          required>
         <button type="submit" class="popup__save" name="save">Создать</button>
       </form>
     </div>
@@ -70,14 +74,14 @@
   <template id="cards-template">
     <article class="card">
       <button type="button" class="card__button-del"></button>
-      <img src="#" alt="#" class="card__image">
+      <img src="#" alt=" " class="card__image">
       <div class="card__item">
         <h2 class="card__title"></h2>
         <button type="button" class="card__like-button" name="btnlike"></button>
       </div>
     </article>
   </template>
-  <script src="scripts/index.js"></script>
+
 </body>
 
 </html>
