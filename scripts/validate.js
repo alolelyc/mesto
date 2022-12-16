@@ -7,6 +7,7 @@ const selector = {
   errorClass: "popup__error_visible",
 };
 
+
 // Функция, которая добавляет класс с ошибкой
 const showInputError = (formElement, inputElement, errorMessage, config) => {
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
