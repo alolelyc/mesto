@@ -12,7 +12,7 @@
 
 @media screen and (max-width: 568px) {
   .page__content {
-    margin: 42px 19px 48px;
+    /*margin: 42px 19px 48px;*/
     max-width: 282px;
   }
 }

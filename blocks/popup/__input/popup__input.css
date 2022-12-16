@@ -1,8 +1,7 @@
-popup__input {
+.popup__input {
   max-width: 358px;
   width: 100%;
   padding: 0 0 13px 0;
-  margin-top: 54px;
 }
 
 .popup__input:focus {

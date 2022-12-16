@@ -1,27 +1,39 @@
 const profileInfo = document.querySelector(".profile__info");
 const nameProfile = document.querySelector(".profile__name");
 const jobProfile = document.querySelector(".profile__job");
-const popupProfileEdit = document.querySelector(".popup_profile-edit"); //попап редактирования профиля
+const popupProfileEdit = document.querySelector(".popup_type_profile-edit"); //попап редактирования профиля
 const popupOpenProfileEdit = document.querySelector(".profile__edit-icon"); // кнопка открытия редактирования попапа
 const popupCloseProfileEdit = popupProfileEdit.querySelector(".popup__close"); // кнопка закрытия попапа редакирования
 const popupFormEdit = popupProfileEdit.querySelector(".popup__form"); //форма редактирования профиля
 const inputNameProfile = document.querySelector(".popup__input_type_name"); // поле введения имени
 const inputJobProfile = document.querySelector(".popup__input_type_job"); //поле введения профессии
 
+const popupCardAdd = document.querySelector(".popup_type_card-add"); //попап добавления карточки
+const popupOpenButtonCardAdd = document.querySelector(
+  ".profile__button-add-icon"
+); //кнопка открытие попапа добавления
+const popupCloseButtonCardAdd = popupCardAdd.querySelector(".popup__close"); // закрытие попапа добавления
+const popupFormAdd = popupCardAdd.querySelector(".popup__form");
+const inputCardName = document.querySelector(".popup__input_type_add"); //поле для введения названия карточки
+const inputCardLink = document.querySelector(".popup__input_type_link"); //форма введения ссылки на карточку
+const cardsContainer = document.querySelector(".elements");
+const cardsTemplate = document
+  .querySelector("#cards-template")
+  .content.querySelector(".card"); // получаем шаблон карточки
+const popupFoto = document.querySelector(".popup_type_open-foto"); //попап большого фото
+const popupCloseFoto = popupFoto.querySelector(".popup__close"); //кнопка закрытия
+const fotoTitle = document.querySelector(".popup__foto-title");
+const fotoImage = document.querySelector(".popup__foto-image");
+
 //1.кнопка открытия редактирования профиля
 const openPopup = function (popup) {
   popup.classList.add("popup_opened");
+  document.addEventListener("keyup", escClosePopupByKey);
 };
 
 const inputProfileClick = function () {
-  inputNameProfile.value = nameProfile.textContent;
-  inputJobProfile.value = jobProfile.textContent;
-};
-
-const openPopupProfileEdit = function () {
-  openPopup(popupProfileEdit);
-  inputNameProfile.value = nameProfile.textContent;
-  inputJobProfile.value = jobProfile.textContent;
+  inputNameProfile.value = "";
+  inputJobProfile.value = "";
 };
 
 // сохранение  полей формы имени и профессии
@@ -32,6 +44,7 @@ const editProfileInfo = function () {
 
 const closePopup = function (popup) {
   popup.classList.remove("popup_opened");
+  document.removeEventListener("keydown", escClosePopupByKey);
 };
 
 const closePopupProfileEdit = function () {
@@ -45,6 +58,14 @@ const closePopupByClickOnOverlay = function (event) {
   }
 };
 
+const escClosePopupByKey = function (e) {
+  // закрытие попап нажатием на Esc
+  if (e.key === "Escape") {
+    const openPopup = document.querySelector(".popup_opened");
+    closePopup(openPopup);
+  }
+};
+
 //кнопка Сохранить редактирование и закрыть
 const savePopupInfo = function (event) {
   event.preventDefault();
@@ -52,42 +73,9 @@ const savePopupInfo = function (event) {
   closePopup(popupProfileEdit);
 };
 
-//вешаем обработчики
-popupFormEdit.addEventListener("submit", savePopupInfo);
-popupOpenProfileEdit.addEventListener("click", function () {
-  openPopup(popupProfileEdit);
-});
-
-popupCloseProfileEdit.addEventListener("click", function () {
-  closePopup(popupProfileEdit);
-});
-popupProfileEdit.addEventListener("click", closePopupByClickOnOverlay);
-
-const popupCardAdd = document.querySelector(".popup_card-add"); //попап добавления карточки
-const popupOpenButtonCardAdd = document.querySelector(
-  ".profile__button-add-icon"
-); //кнопка открытие попапа добавления
-const popupCloseButtonCardAdd = popupCardAdd.querySelector(".popup__close"); // закрытие попапа добавления
-const popupFormAdd = popupCardAdd.querySelector(".popup__form"); //форма добавления карточки
-const inputCardName = document.querySelector(".popup__input_type_add"); //поле для введения названия карточки
-const inputCardLink = document.querySelector(".popup__input_type_link"); //форма введения ссылки на карточку
-const cardsContainer = document.querySelector(".elements");
-const cardsTemplate = document
-  .querySelector("#cards-template")
-  .content.querySelector(".card"); // получаем шаблон карточки
-const popupFoto = document.querySelector(".popup_open-foto"); //попап большого фото
-const popupCloseFoto = popupFoto.querySelector(".popup__close"); //кнопка закрытия
-const fotoTitle = document.querySelector(".popup__foto-title");
-const fotoImage = document.querySelector(".popup__foto-image");
-
-const inputCardClick = function () {
-  inputCardName.value = "";
-  inputCardLink.value = "";
-};
-
 const openPopupCard = function () {
   openPopup(popupCardAdd);
-  popupFormAdd.reset(inputCardClick);
+  popupFormAdd.reset();
 };
 
 const closePopupCardAdd = function () {
@@ -148,12 +136,23 @@ const savePopupInfoCard = function (event) {
 };
 
 //вешаем обработчики
-popupCardAdd.addEventListener("submit", savePopupInfoCard);
+popupFormAdd.addEventListener("submit", savePopupInfoCard);
 popupOpenButtonCardAdd.addEventListener("click", openPopupCard);
 popupCloseButtonCardAdd.addEventListener("click", function () {
   closePopup(popupCardAdd);
 });
 popupCardAdd.addEventListener("click", closePopupByClickOnOverlay);
+popupFoto.addEventListener("click", closePopupByClickOnOverlay);
+
+popupFormEdit.addEventListener("submit", savePopupInfo);
+popupOpenProfileEdit.addEventListener("click", function () {
+  openPopup(popupProfileEdit);
+  popupFormEdit.reset();
+});
+popupCloseProfileEdit.addEventListener("click", function () {
+  closePopup(popupProfileEdit);
+});
+popupProfileEdit.addEventListener("click", closePopupByClickOnOverlay);
 
 //перебор карточек массива
 cards.forEach((dataCard) => {
