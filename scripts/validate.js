@@ -7,7 +7,6 @@ const selector = {
   errorClass: "popup__error_visible",
 };
 
-
 // Функция, которая добавляет класс с ошибкой
 const showInputError = (formElement, inputElement, errorMessage, config) => {
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
@@ -28,7 +27,12 @@ const hideInputError = (formElement, inputElement, config) => {
 const isValid = (formElement, inputElement, config) => {
   if (!inputElement.validity.valid) {
     // Если поле не проходит валидацию, покажем ошибку
-    showInputError(formElement, inputElement, inputElement.validationMessage, config); //передаем сообщение об ошибке вторым аргументом
+    showInputError(
+      formElement,
+      inputElement,
+      inputElement.validationMessage,
+      config
+    ); //передаем сообщение об ошибке вторым аргументом
   } else {
     // Если проходит, скроем
     hideInputError(formElement, inputElement, config);
@@ -48,19 +52,16 @@ const hasInvalidInput = (inputList) => {
 };
 
 const toggleButtonState = (inputList, buttonElement, config) => {
- if (hasInvalidInput(inputList)) {
+  if (hasInvalidInput(inputList)) {
     buttonElement.classList.add(config.inactiveButtonClass);
-     buttonElement.disabled = "disabled";
-      
+    buttonElement.disabled = "disabled";
   } else {
     // иначе сделай кнопку активной
-    
+
     buttonElement.classList.remove(config.inactiveButtonClass);
     buttonElement.disabled = "";
   }
 };
-
-
 
 const setEventListeners = (formElement, config) => {
   // Находим все поля внутри формы,
@@ -68,9 +69,7 @@ const setEventListeners = (formElement, config) => {
   const inputList = Array.from(
     formElement.querySelectorAll(config.inputSelector)
   );
-  const buttonElement = formElement.querySelector(
-    config.submitButtonSelector
-  ); // Найдём в текущей форме кнопку отправки
+  const buttonElement = formElement.querySelector(config.submitButtonSelector); // Найдём в текущей форме кнопку отправки
 
   toggleButtonState(inputList, buttonElement, config); // Вызовем toggle и передадим ей массив полей и ввода кнопки
   // Обойдём все элементы полученной коллекции
@@ -80,17 +79,14 @@ const setEventListeners = (formElement, config) => {
       // Внутри колбэка вызовем isValid, передав ей форму и проверяемый элемент
       isValid(formElement, inputElement, config);
       toggleButtonState(inputList, buttonElement, config);
-      
     });
   });
-formElement.addEventListener("reset", function () {
+  formElement.addEventListener("reset", function () {
     setTimeout(() => {
       toggleButtonState(inputList, buttonElement, config);
     }, 0);
   });
-
 };
-
 
 const enableValidation = (config) => {
   // Найдём все формы с указанным классом в DOM,
@@ -104,7 +100,7 @@ const enableValidation = (config) => {
     });
     // Для каждой формы вызовем функцию setEventListeners,
     // передав ей элемент формы
-    setEventListeners(formElement,config);
+    setEventListeners(formElement, config);
   });
 };
 
