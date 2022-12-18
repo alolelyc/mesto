@@ -25,16 +25,21 @@ const popupCloseFoto = popupFoto.querySelector(".popup__close"); //кнопка 
 const fotoTitle = document.querySelector(".popup__foto-title");
 const fotoImage = document.querySelector(".popup__foto-image");
 
+
+
 //1.кнопка открытия редактирования профиля
 const openPopup = function (popup) {
   popup.classList.add("popup_opened");
   document.addEventListener("keyup", escClosePopupByKey);
+  
 };
 
+
+/*
 const inputProfileClick = function () {
   inputNameProfile.value = "";
   inputJobProfile.value = "";
-};
+};*/
 
 // сохранение  полей формы имени и профессии
 const editProfileInfo = function () {
@@ -145,9 +150,12 @@ popupCardAdd.addEventListener("click", closePopupByClickOnOverlay);
 popupFoto.addEventListener("click", closePopupByClickOnOverlay);
 
 popupFormEdit.addEventListener("submit", savePopupInfo);
+
 popupOpenProfileEdit.addEventListener("click", function () {
   openPopup(popupProfileEdit);
-  popupFormEdit.reset();
+ inputNameProfile.value =  nameProfile.textContent;
+inputJobProfile.value = jobProfile.textContent;
+  /*popupFormEdit.reset();*/
 });
 popupCloseProfileEdit.addEventListener("click", function () {
   closePopup(popupProfileEdit);

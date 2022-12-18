@@ -48,18 +48,19 @@ const hasInvalidInput = (inputList) => {
 };
 
 const toggleButtonState = (inputList, buttonElement, config) => {
-  if (hasInvalidInput(inputList)) {
-    // Если есть хотя бы один невалидный инпут
-    // сделай кнопку неактивной
+ if (hasInvalidInput(inputList)) {
     buttonElement.classList.add(config.inactiveButtonClass);
-    // сделай кнопку неактивной
-    buttonElement.disabled = "disabled";
+     buttonElement.disabled = "disabled";
+      
   } else {
     // иначе сделай кнопку активной
+    
     buttonElement.classList.remove(config.inactiveButtonClass);
     buttonElement.disabled = "";
   }
 };
+
+
 
 const setEventListeners = (formElement, config) => {
   // Находим все поля внутри формы,
@@ -77,16 +78,19 @@ const setEventListeners = (formElement, config) => {
     // каждому полю добавим обработчик события input
     inputElement.addEventListener("input", () => {
       // Внутри колбэка вызовем isValid, передав ей форму и проверяемый элемент
-      isValid(formElement, inputElement,config);
+      isValid(formElement, inputElement, config);
       toggleButtonState(inputList, buttonElement, config);
-      formElement.addEventListener("reset", function () {
-        setTimeout(() => {
-          toggleButtonState(inputList, buttonElement, config);
-        }, 0);
-      });
+      
     });
   });
+formElement.addEventListener("reset", function () {
+    setTimeout(() => {
+      toggleButtonState(inputList, buttonElement, config);
+    }, 0);
+  });
+
 };
+
 
 const enableValidation = (config) => {
   // Найдём все формы с указанным классом в DOM,
