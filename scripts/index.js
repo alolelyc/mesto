@@ -141,7 +141,7 @@ popupCloseProfileEdit.addEventListener("click", function () {
   closePopup(popupProfileEdit);
 });
 popupProfileEdit.addEventListener("click", closePopupByClickOnOverlay);
-
+ 
 const validPopupFormAdd = new FormValidator(selector, popupFormAdd);
 validPopupFormAdd.enableValidation();
 
