@@ -4,9 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="./pages/index.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script defer src="./scripts/cards.js"></script>
-    <script defer src="./scripts/index.js"></script>
-    <script defer src="./scripts/validate.js"></script>
+    <script defer type="module" src="./scripts/index.js"></script>
     <title>Mesto</title>
   </head>
 
@@ -124,7 +122,7 @@
     <template id="cards-template">
       <article class="card">
         <button type="button" class="card__button-del"></button>
-        <img src="#" alt=" " class="card__image" />
+        <img src="#" alt=" " class="card__image">
         <div class="card__item">
           <h2 class="card__title"></h2>
           <button

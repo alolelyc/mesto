@@ -1,31 +1,56 @@
+import { Card } from "./Card.js";
+import { cards } from "./data.js";
+import { selector } from "./selector.js";
+import { FormValidator } from "./FormValidator.js";
+
+// попап редактирования профиля
 const profileInfo = document.querySelector(".profile__info");
 const nameProfile = document.querySelector(".profile__name");
 const jobProfile = document.querySelector(".profile__job");
 const popupProfileEdit = document.querySelector(".popup_type_profile-edit"); //попап редактирования профиля
-const popupOpenProfileEdit = document.querySelector(".profile__edit-icon"); // кнопка открытия редактирования попапа
 const popupCloseProfileEdit = popupProfileEdit.querySelector(".popup__close"); // кнопка закрытия попапа редакирования
 const popupFormEdit = popupProfileEdit.querySelector(".popup__form"); //форма редактирования профиля
 const inputNameProfile = document.querySelector(".popup__input_type_name"); // поле введения имени
 const inputJobProfile = document.querySelector(".popup__input_type_job"); //поле введения профессии
+const popupOpenProfileEdit = document.querySelector(".profile__edit-icon"); // кнопка открытия редактирования попапа
 
-const popupCardAdd = document.querySelector(".popup_type_card-add"); //попап добавления карточки
+//попап добавления карточки
 const popupOpenButtonCardAdd = document.querySelector(
   ".profile__button-add-icon"
 ); //кнопка открытие попапа добавления
-const popupCloseButtonCardAdd = popupCardAdd.querySelector(".popup__close"); // закрытие попапа добавления
+const popupCardAdd = document.querySelector(".popup_type_card-add"); //попап добавления карточки
 const popupFormAdd = popupCardAdd.querySelector(".popup__form");
 const inputCardName = document.querySelector(".popup__input_type_add"); //поле для введения названия карточки
-const inputCardLink = document.querySelector(".popup__input_type_link"); //форма введения ссылки на карточку
-const cardsContainer = document.querySelector(".elements");
-const cardsTemplate = document
+const inputCardLink = document.querySelector(".popup__input_type_link"); //поле для введения ссылки на карточку
+const popupCloseButtonCardAdd = popupCardAdd.querySelector(".popup__close"); // закрытие попапа добавления
+const templateSelector = document
   .querySelector("#cards-template")
-  .content.querySelector(".card"); // получаем шаблон карточки
+  .content.querySelector(".elements");
+
+//попап большого фото
 const popupFoto = document.querySelector(".popup_type_open-foto"); //попап большого фото
 const popupCloseFoto = popupFoto.querySelector(".popup__close"); //кнопка закрытия
-const fotoTitle = document.querySelector(".popup__foto-title");
-const fotoImage = document.querySelector(".popup__foto-image");
+const popupFotoTitle = popupFoto.querySelector(".popup__foto-title");
+const popupFotoImage = popupFoto.querySelector(".popup__foto-image");
 
-//1.кнопка открытия редактирования профиля
+const cardsContainer = document.querySelector(".elements");
+
+const openPopupFoto = (title, link) => {
+  popupFotoImage.src = link;
+  popupFotoImage.alt = title;
+  popupFotoTitle.textContent = title;
+  openPopup(popupFoto);
+};
+
+const renderCard = (item, cardElement) => {
+  const card = new Card(item, "#cards-template", openPopupFoto);
+  const templateElement = card.generateCard();
+  cardElement.prepend(templateElement);
+};
+cards.forEach(function (item) {
+  renderCard(item, cardsContainer);
+});
+
 const openPopup = function (popup) {
   popup.classList.add("popup_opened");
   document.addEventListener("keyup", escClosePopupByKey);
@@ -61,7 +86,7 @@ const escClosePopupByKey = function (e) {
   }
 };
 
-//кнопка Сохранить редактирование и закрыть
+//кнопка Сохранить редактирование профиля и закрыть
 const savePopupInfo = function (event) {
   event.preventDefault();
   editProfileInfo();
@@ -77,56 +102,22 @@ const closePopupCardAdd = function () {
   closePopup(popupCardAdd);
 };
 
-//генерируем новую карточку
-const generateCard = (dataCard) => {
-  const newCard = cardsTemplate.cloneNode(true); //новая карточка
-  const titleCard = newCard.querySelector(".card__title");
-  titleCard.textContent = dataCard.title;
-
-  const likeCard = newCard.querySelector(".card__like-button");
-  const likeCardActive = function () {
-    likeCard.classList.toggle("card__like-button_active");
-  };
-  const imageCard = newCard.querySelector(".card__image");
-  imageCard.src = dataCard.link;
-  imageCard.alt = dataCard.alt;
-
-  const delCard = newCard.querySelector(".card__button-del");
-  delCard.addEventListener("click", handleDeleteCard);
-  likeCard.addEventListener("click", likeCardActive);
-
-  const openPopupFoto = function () {
-    fotoImage.src = dataCard.link;
-    fotoImage.alt = dataCard.title;
-    fotoTitle.textContent = dataCard.title;
-    openPopup(popupFoto);
-  };
-
-  imageCard.addEventListener("click", openPopupFoto);
-
-  return newCard;
-};
-
 const closePopupFoto = function () {
   closePopup(popupFoto);
 };
+
 popupCloseFoto.addEventListener("click", function () {
   closePopup(popupFoto);
 });
 
-//добавление карточек
-const renderCard = (dataCard) => {
-  cardsContainer.prepend(generateCard(dataCard));
-};
-//удаление карточки
-const handleDeleteCard = (event) => {
-  event.target.closest(".card").remove();
-};
-
-//кнопка Создать и закрыть
+//кнопка создания закрытия добавления фото
 const savePopupInfoCard = function (event) {
   event.preventDefault();
-  renderCard({ title: inputCardName.value, link: inputCardLink.value });
+  const formFotoAdd = {
+    title: inputCardName.value,
+    link: inputCardLink.value,
+  };
+  renderCard(formFotoAdd, cardsContainer);
   closePopup(popupCardAdd);
 };
 
@@ -151,7 +142,8 @@ popupCloseProfileEdit.addEventListener("click", function () {
 });
 popupProfileEdit.addEventListener("click", closePopupByClickOnOverlay);
 
-//перебор карточек массива
-cards.forEach((dataCard) => {
-  renderCard(dataCard);
-});
+const validPopupFormAdd = new FormValidator(selector, popupFormAdd);
+validPopupFormAdd.enableValidation();
+
+const validPopupFormEdit = new FormValidator(selector, popupFormEdit);
+validPopupFormEdit.enableValidation();
