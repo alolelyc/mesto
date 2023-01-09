@@ -43,7 +43,7 @@ const openPopupFoto = (title, link) => {
 };
 
 const renderCard = (item, cardElement) => {
-  const card = new Card(item, "#cards-template", openPopupFoto);
+  const card = new Card (item, "#cards-template", openPopupFoto);
   const templateElement = card.generateCard();
   cardElement.prepend(templateElement);
 };
