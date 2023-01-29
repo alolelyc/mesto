@@ -7,14 +7,19 @@ export class FormValidator {
     this._errorClass = config.errorClass;
     this._formElement = formElement;
     this._inputList = Array.from(
-    this._formElement.querySelectorAll(this._inputSelector));
-    this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
+      this._formElement.querySelectorAll(this._inputSelector)
+    );
+    this._buttonElement = this._formElement.querySelector(
+      this._submitButtonSelector
+    );
   }
 
   // Функция, которая добавляет класс с ошибкой
 
   _showInputError(inputElement, errorMessage) {
-    const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
+    const errorElement = this._formElement.querySelector(
+      `#${inputElement.id}-error`
+    );
     inputElement.classList.add(this._inputErrorClass);
     errorElement.textContent = errorMessage;
     errorElement.classList.add(this._errorClass);
@@ -23,7 +28,9 @@ export class FormValidator {
   // Функция, которая удаляет класс с ошибкой
 
   _hideInputError(inputElement) {
-    const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
+    const errorElement = this._formElement.querySelector(
+      `#${inputElement.id}-error`
+    );
     inputElement.classList.remove(this._inputErrorClass);
     errorElement.classList.remove(this._errorClass); //скрывает сообщение об ошибке
     errorElement.textContent = "";
@@ -34,9 +41,7 @@ export class FormValidator {
   _toggleInputErrorState(inputElement) {
     if (!inputElement.validity.valid) {
       // Если поле не проходит валидацию, покажем ошибку
-      this._showInputError(
-        inputElement,
-        inputElement.validationMessage ); //передаем сообщение об ошибке вторым аргументом
+      this._showInputError(inputElement, inputElement.validationMessage); //передаем сообщение об ошибке вторым аргументом
     } else {
       // Если проходит, скроем
       this._hideInputError(inputElement);
@@ -51,7 +56,7 @@ export class FormValidator {
       // Если поле не валидно, колбэк вернёт true
       // Обход массива прекратится и вся функция
       // hasInvalidInput вернёт true
-    return !inputElement.validity.valid;
+      return !inputElement.validity.valid;
     });
   }
 
@@ -82,7 +87,7 @@ export class FormValidator {
   enableValidation() {
     this._formElement.addEventListener("submit", function (evt) {
       evt.preventDefault();
-     });
+    });
     this._setEventListeners(); // Для переданной формы вызовем функцию setEventListeners,// передав ей элемент формы
   }
 }
