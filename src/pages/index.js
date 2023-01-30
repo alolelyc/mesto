@@ -17,7 +17,7 @@ import PopupWithImage from "../scripts/components/PopupWithImage.js";
 import UserInfo from "../scripts/components/UserInfo.js";
 import { cards } from "../scripts/utils/data.js";
 
-const popupFoto = (title, link) => {
+const openImagePopup = (title, link) => {
   popupImage.open(title, link);
 };
 
@@ -28,7 +28,7 @@ const renderCard = (item) => {
       link: item.link,
     },
     templateSelector,
-    popupFoto
+    openImagePopup
   );
   const cardElement = card.generateCard();
   return cardElement;
@@ -75,7 +75,7 @@ popupOpenProfileEdit.addEventListener("click", () => {
   inputNameProfile.value = userData.name;
   inputJobProfile.value = userData.job;
   profileEditPopup.open();
-});
+  });
 
 //обработка формы добавления картинки
 const handleFormSubmitCardAdd = (formValues) => {
@@ -83,13 +83,16 @@ const handleFormSubmitCardAdd = (formValues) => {
   const cardElement = renderCard({ name: title, link: url });
   cardList.addItem(cardElement);
   cardAddPopup.close(); // закрываем попап
-};
+  validPopupFormAdd.toggleButtonState();
+  
+ };
 
 const cardAddPopup = new PopupWithForm(
   { popupSelector: ".popup_type_card-add" },
   handleFormSubmitCardAdd
-); //экземпляр попапа добавления карточки
+ ); //экземпляр попапа добавления карточки
 cardAddPopup.setEventListeners();
+
 
 const validPopupFormAdd = new FormValidator(config, popupFormAdd);
 validPopupFormAdd.enableValidation();
@@ -100,4 +103,4 @@ validPopupFormEdit.enableValidation();
 // обработчик кнопки добавления карточки
 popupOpenButtonCardAdd.addEventListener("click", () => {
   cardAddPopup.open();
-});
+ });

@@ -8,6 +8,7 @@ export class Popup {
   open() {
     this._popupElement.classList.add("popup_opened");
     document.addEventListener("keyup", this._handleEscClose);
+    
   }
 
   close() {
@@ -29,7 +30,6 @@ export class Popup {
 
   setEventListeners() {
     this._popupElement.addEventListener("click", this.handleOverlay);
-    document.addEventListener("keyup", this._handleEscClose);
     this._buttonClose.addEventListener("click", () => { this.close() });
       
   }
