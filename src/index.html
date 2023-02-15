@@ -1,24 +1,32 @@
 ﻿<!DOCTYPE html>
 <html lang="ru">
   <head>
-    <meta charset="UTF-8"/>
+    <meta charset="UTF-8" />
     <!--<link rel="stylesheet" href="./pages/index.css"/>-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!--<script defer type="module" src="./pages/index.js"></script>-->
     <title>Mesto</title>
   </head>
 
   <body class="page">
     <header class="header">
-      <img src="<%=require('../src/images/logo.svg')%>" alt="место россия" class="header__logo"></header>
+      <img
+        src="<%=require('../src/images/logo.svg')%>"
+        alt="место россия"
+        class="header__logo"
+      />
+    </header>
 
     <main class="content page__content">
       <section class="profile">
-        <img
-          src="<%=require('../src/images/avatar.png')%>"
-          alt="жак ив кусто в красной шапке"
-          class="profile__avatar-image"
-        />
+        <div class="profile__avatar">
+          <img
+            src="<%=require('../src/images/avatar.png')%>"
+            alt="жак ив кусто в красной шапке"
+            class="profile__avatar-image"
+          />
+          <button type="button" class="profile__avatar-button"></button>
+        </div>
         <div class="profile__info">
           <div class="profile__info-title">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -110,6 +118,40 @@
       </div>
     </section>
 
+    <section class="popup popup_type_open-avatar">
+      <div class="popup__content">
+        <button type="button" class="popup__close"></button>
+        <h2 class="popup__title">Обновить аватар</h2>
+        <form class="popup__form" name="form" method="post" novalidate>
+          <input
+            class="popup__input popup__input_type_link"
+            type="url"
+            name="link"
+            id="link"
+            required
+          />
+          <span id="link-error" class="popup__error"></span>
+          <button
+            type="submit"
+            class="popup__save popup__save_disabled"
+            name="save"
+          >
+            Сохранить
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <section class="popup popup_type_delete-card">
+      <div class="popup__content">
+        <button type="button" class="popup__close"></button>
+        <h2 class="popup__title">Вы уверены?</h2>
+        <form class="popup__form" name="delete-card" action="#" novalidate>
+          <button type="submit" class="popup__save">Да</button>
+        </form>
+      </div>
+    </section>
+
     <section class="popup popup_type_open-foto">
       <div class="popup__content-image">
         <button type="button" class="popup__close"></button>
@@ -121,14 +163,17 @@
     <template id="cards-template">
       <article class="card">
         <button type="button" class="card__button-del"></button>
-        <img src="#" alt=" " class="card__image">
+        <img src="#" alt=" " class="card__image" />
         <div class="card__item">
           <h2 class="card__title"></h2>
-          <button
-            type="button"
-            class="card__like-button"
-            name="btnlike"
-          ></button>
+          <div class="card__like-box">
+            <button
+              type="button"
+              class="card__like-button"
+              name="btnlike"
+            ></button>
+            <span id="count-likes" class="card__count-likes">0</span>
+          </div>
         </div>
       </article>
     </template>
