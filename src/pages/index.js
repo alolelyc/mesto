@@ -175,6 +175,7 @@ const popupEditAvatar = new PopupWithForm("Сохранить", {
 popupEditAvatar.setEventListeners();
 
 popupButtonAvatar.addEventListener("click", () => {
+  validPopupFormEditAvatar.toggleButtonState();
   popupEditAvatar.open();
 });
 
@@ -190,6 +191,7 @@ const cardAddPopup = new PopupWithForm(
         .renderCard(formValues)
         .then((formValues) => {
           cardList.addItem(renderCard(formValues));
+          validPopupFormAdd.toggleButtonState();
           cardAddPopup.close();
         })
         .catch((err) => {
@@ -205,6 +207,7 @@ cardAddPopup.setEventListeners();
 
 // обработчик кнопки добавления карточки
 popupOpenButtonCardAdd.addEventListener("click", () => {
+  validPopupFormAdd.toggleButtonState();
   cardAddPopup.open();
 });
 
@@ -223,5 +226,5 @@ validPopupFormAdd.enableValidation();
 const validPopupFormEdit = new FormValidator(config, popupFormEdit);
 validPopupFormEdit.enableValidation();
 
-const validFormEditAvatar = new FormValidator(config, popupFormAvatar);
-validFormEditAvatar.enableValidation();
+const validPopupFormEditAvatar = new FormValidator(config, popupFormAvatar);
+validPopupFormEditAvatar.enableValidation();
